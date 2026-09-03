@@ -14,7 +14,7 @@ import { eq } from 'drizzle-orm'
  * {
  *   prompt: string,                // 必需：主角生成提示词
  *   aspectRatio?: "1:1",           // 可选：画面比例，默认 1:1
- *   referenceImage?: string,       // 可选：用户上传的参考图URL（img2img模式）
+ *   referenceImage?: string,         // 可选：用户上传的参考图URL（img2img模式）
  *   webhookUrl?: string            // 可选：自定义 webhook URL
  * }
  *
@@ -24,11 +24,16 @@ import { eq } from 'drizzle-orm'
  *     { id: string, prompt: string, size?: string, referenceImage?: string }
  *   ]
  * }
- * 
+ *
+ * 使用 GPT Image 2 模型生成主角图片：
+ * - 文生图模式：gpt-image-2-text-to-image
+ * - 图生图模式：gpt-image-2-image-to-image
+ * - 默认分辨率：2K
+ *
  * 支持两种模式：
  * 1. webhook 模式：如果配置了 webhook，立即返回 taskId
  * 2. 轮询模式：如果没有配置 webhook，后端轮询任务状态直到完成
- * 
+ *
  * 每次成功生成主角扣除1积分，失败不扣积分
  */
 
@@ -50,26 +55,29 @@ async function generateSingleCharacter(
   itemId?: string,
   versionId?: string,
   versionGroupId?: string,
-  referenceImage?: string   // 新增：用户上传的参考图URL（图生图模式）
+  referenceImage?: string   // 用户上传的参考图URL（图生图模式）
 ): Promise<{ success: boolean; images?: any[]; requestId?: string; error?: string }> {
   if (!prompt || !prompt.trim()) {
     return { success: false, error: "Prompt is required" }
   }
 
-  // 构建 Kie.ai API 请求体
-  const kieRequestBody: any = {
-    model: "nano-banana-2",
-    input: {
-      prompt: prompt,
-      image_input: [],
-      resolution: "1K",
-      output_format: "png"
-    }
-  }
+  // 判断是否使用图生图模式
+  const useImageToImage = referenceImage && typeof referenceImage === 'string' && referenceImage.trim().length > 0
 
-  // 如果提供了用户参考图，加入 image_input（图生图模式）
-  if (referenceImage && typeof referenceImage === 'string' && referenceImage.trim().length > 0) {
-    kieRequestBody.input.image_input = [referenceImage]
+  // GPT Image 2 API 请求体
+  const kieRequestBody: any = {
+    // 文生图：gpt-image-2-text-to-image；图生图：gpt-image-2-image-to-image
+    model: useImageToImage ? "gpt-image-2-image-to-image" : "gpt-image-2-text-to-image",
+    input: useImageToImage
+      ? {
+          prompt: prompt,
+          input_urls: [referenceImage],
+          resolution: "2K",
+        }
+      : {
+          prompt: prompt,
+          resolution: "2K",
+        }
   }
 
   // 如果配置了 webhookUrl，添加到请求体

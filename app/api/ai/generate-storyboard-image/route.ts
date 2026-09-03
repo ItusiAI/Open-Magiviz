@@ -14,9 +14,9 @@ import { eq } from 'drizzle-orm'
  * {
  *   storyboardPrompt: string,        // 必需：分镜图生成提示词
  *   aspectRatio: "16:9" | "9:16",    // 必需：画面比例
- *   resolution?: "2K" | "4K",        // 可选：分辨率，默认 2K
- *   characterImages?: string[]       // 可选：角色图片URL数组（最多8张）
- *   referenceImage?: string          // 可选：用户上传的参考图URL（场景参考图，作为image_input的第一张）
+ *   resolution?: "2K" | "4K",        // 可选：分辨率，默认 2K（GPT Image 2）
+ *   characterImages?: string[]       // 可选：角色图片URL数组（最多16张，GPT Image 2 img2img 支持）
+ *   referenceImage?: string          // 可选：用户上传的参考图URL（场景参考图）
  *   webhookUrl?: string              // 可选：自定义 webhook URL
  *   firstFramePrompt?: string        // 可选：首帧提示词（首尾帧模式使用）
  *   lastFramePrompt?: string         // 可选：尾帧提示词（首尾帧模式使用）
@@ -28,11 +28,17 @@ import { eq } from 'drizzle-orm'
  *     { id: string, storyboardPrompt: string, aspectRatio: "16:9" | "9:16", characterImages?: string[], firstFramePrompt?: string, lastFramePrompt?: string, referenceImage?: string }
  *   ]
  * }
- * 
+ *
+ * 使用 GPT Image 2 模型生成：
+ * - 文生图：gpt-image-2-text-to-image（无参考图、无角色图时）
+ * - 图生图：gpt-image-2-image-to-image（有参考图或角色图时）
+ * - 默认分辨率：2K
+ * - 支持最多16张参考图
+ *
  * 支持两种模式：
  * 1. webhook 模式：如果配置了 webhook，立即返回 taskId
  * 2. 轮询模式：如果没有配置 webhook，后端轮询任务状态直到完成
- * 
+ *
  * 积分计算：
  * - 普通模式：每个分镜图 1 积分
  * - 首尾帧模式：每个分镜图 2 积分（首帧+尾帧各1积分）
@@ -48,6 +54,10 @@ const WEBHOOK_URL = process.env.KIE_WEBHOOK_URL
 
 /**
  * 生成首帧或尾帧的单个图片
+ * 使用 GPT Image 2 模型：
+ * - 文生图：gpt-image-2-text-to-image
+ * - 图生图：gpt-image-2-image-to-image（有角色图或参考图时）
+ * - 默认分辨率：2K
  */
 async function generateFrameImage(
   prompt: string,
@@ -63,7 +73,7 @@ async function generateFrameImage(
     firstFramePrompt?: string
     lastFramePrompt?: string
     regenerateFrameType?: 'first' | 'last'  // 重新生成单个帧的类型
-    referenceImage?: string   // 新增：用户上传的参考图URL（图生图模式）
+    referenceImage?: string   // 用户上传的参考图URL（图生图模式）
   }
 ): Promise<{
   success: boolean
@@ -84,25 +94,21 @@ async function generateFrameImage(
     return { success: false, error: "aspectRatio 只支持 '16:9' 或 '9:16'" }
   }
 
-  const kieRequestBody: any = {
-    model: "nano-banana-2",
-    input: {
-      prompt: prompt,
-      image_input: [],
-      aspect_ratio: aspectRatio,
-      resolution: "1K",
-      output_format: "png"
-    }
-  }
+  // 判断是否有图生图输入（用户参考图 + 角色图）
+  const hasImageInput = (options?.referenceImage && typeof options.referenceImage === 'string' && options.referenceImage.trim().length > 0)
+    || (Array.isArray(characterImages) && characterImages.length > 0 && characterImages.some((item: any) => {
+      const url = typeof item === 'object' && item !== null && 'imageUrl' in item ? item.imageUrl : item
+      return typeof url === 'string' && url.trim().length > 0
+    }))
 
-  // 构建 image_input：用户参考图（最强参考）放第一位，然后是角色图（最多8张）
-  const imageInputList: string[] = []
+  // 构建 input_urls：有图生图输入时用 gpt-image-2-image-to-image，最多16张图
+  let imageInputList: string[] = []
   if (options?.referenceImage && typeof options.referenceImage === 'string' && options.referenceImage.trim().length > 0) {
     imageInputList.push(options.referenceImage)
   }
   if (Array.isArray(characterImages) && characterImages.length > 0) {
     const charUrls = characterImages
-      .slice(0, 8)
+      .slice(0, 16)
       .map((item: any) => {
         if (typeof item === 'object' && item !== null && 'imageUrl' in item) {
           return item.imageUrl
@@ -112,8 +118,25 @@ async function generateFrameImage(
       .filter((url: string) => typeof url === 'string' && url.trim().length > 0)
     imageInputList.push(...charUrls)
   }
-  if (imageInputList.length > 0) {
-    kieRequestBody.input.image_input = imageInputList.slice(0, 8)
+  // 最多16张图（GPT Image 2 img2img 支持最多16张）
+  imageInputList = imageInputList.slice(0, 16)
+
+  // GPT Image 2 API 请求体
+  const kieRequestBody: any = {
+    // 有图生图输入时用 gpt-image-2-image-to-image，否则用 gpt-image-2-text-to-image
+    model: hasImageInput ? "gpt-image-2-image-to-image" : "gpt-image-2-text-to-image",
+    input: hasImageInput
+      ? {
+          prompt: prompt,
+          input_urls: imageInputList,
+          aspect_ratio: aspectRatio,
+          resolution: "2K",
+        }
+      : {
+          prompt: prompt,
+          aspect_ratio: aspectRatio,
+          resolution: "2K",
+        }
   }
 
   // 配置 webhook（环境变量优先，支持前端覆盖）
@@ -244,6 +267,7 @@ async function generateFrameImage(
 
 /**
  * 生成单个分镜图（支持首尾帧模式）
+ * 使用 GPT Image 2 模型，默认为 2K 分辨率
  * 如果提供了 firstFramePrompt 和 lastFramePrompt，会并行生成首帧和尾帧
  */
 async function generateSingleStoryboard(
@@ -457,6 +481,10 @@ async function generateSingleStoryboard(
 
 /**
  * 原始的单个分镜图生成（用于普通模式）
+ * 使用 GPT Image 2 模型：
+ * - 文生图：gpt-image-2-text-to-image（无参考图、无角色图时）
+ * - 图生图：gpt-image-2-image-to-image（有参考图或角色图时）
+ * - 默认分辨率：2K
  */
 async function generateSingleStoryboardOriginal(
   storyboardPrompt: string,
@@ -468,7 +496,7 @@ async function generateSingleStoryboardOriginal(
   itemId?: string,
   versionId?: string,
   versionGroupId?: string,
-  referenceImage?: string   // 新增：用户上传的参考图URL（图生图模式）
+  referenceImage?: string   // 用户上传的参考图URL（图生图模式）
 ): Promise<{
   success: boolean
   images?: {
@@ -488,29 +516,22 @@ async function generateSingleStoryboardOriginal(
     return { success: false, error: "aspectRatio 只支持 '16:9' 或 '9:16'" }
   }
 
-  // 构建 Kie.ai API 请求体
-  const kieRequestBody: any = {
-    model: "nano-banana-2",
-    input: {
-      prompt: storyboardPrompt,
-      image_input: [],
-      aspect_ratio: aspectRatio,
-      resolution: "1K",
-      output_format: "png"
-    }
-  }
+  // 判断是否有图生图输入（用户参考图 + 角色图）
+  const hasImageInput = (referenceImage && typeof referenceImage === 'string' && referenceImage.trim().length > 0)
+    || (Array.isArray(characterImages) && characterImages.length > 0 && characterImages.some((item: any) => {
+      const url = typeof item === 'object' && item !== null && 'imageUrl' in item ? item.imageUrl : item
+      return typeof url === 'string' && url.trim().length > 0
+    }))
 
-  // 构建 image_input：用户参考图（最强参考）放第一位，然后是角色图（最多8张）
-  // 注意：image_input 必须是字符串数组（URL数组），不是对象数组
-  const imageInputList: string[] = []
+  // 构建 input_urls：有图生图输入时用 gpt-image-2-image-to-image，最多16张图
+  let imageInputList: string[] = []
   if (referenceImage && typeof referenceImage === 'string' && referenceImage.trim().length > 0) {
     imageInputList.push(referenceImage)
   }
   if (Array.isArray(characterImages) && characterImages.length > 0) {
     const charUrls = characterImages
-      .slice(0, 8)
+      .slice(0, 16)
       .map((item: any) => {
-        // 如果是对象，提取 imageUrl；否则直接使用字符串
         if (typeof item === 'object' && item !== null && 'imageUrl' in item) {
           return item.imageUrl
         }
@@ -519,8 +540,25 @@ async function generateSingleStoryboardOriginal(
       .filter((url: string) => typeof url === 'string' && url.trim().length > 0)
     imageInputList.push(...charUrls)
   }
-  if (imageInputList.length > 0) {
-    kieRequestBody.input.image_input = imageInputList.slice(0, 8)
+  // 最多16张图（GPT Image 2 img2img 支持最多16张）
+  imageInputList = imageInputList.slice(0, 16)
+
+  // GPT Image 2 API 请求体
+  const kieRequestBody: any = {
+    // 有图生图输入时用 gpt-image-2-image-to-image，否则用 gpt-image-2-text-to-image
+    model: hasImageInput ? "gpt-image-2-image-to-image" : "gpt-image-2-text-to-image",
+    input: hasImageInput
+      ? {
+          prompt: storyboardPrompt,
+          input_urls: imageInputList,
+          aspect_ratio: aspectRatio,
+          resolution: "2K",
+        }
+      : {
+          prompt: storyboardPrompt,
+          aspect_ratio: aspectRatio,
+          resolution: "2K",
+        }
   }
 
   // 如果配置了 webhookUrl，添加到请求体
