@@ -1,6 +1,11 @@
 ## 赞助商 | Sponsor
 
-| **MiniMax H3 视频生成 API｜秘塔科技**<br><br>秘塔科技提供高性价比的 MiniMax H3 视频生成服务：**768P 仅 0.09 元/秒，2K 仅 0.15 元/秒**。支持原生 2K、音画同步，API 兼容 **OpenAI 协议**，同时支持 **ComfyUI**，无需自行部署 GPU。<br><br>通过 [Magiviz专属链接注册](https://metaso.cn/minimax-h3/?s=Magiviz)，即可领取赠送额度及专属优惠。 | [<img src="public/images/meta.jpg" alt="秘塔科技 - MiniMax H3" width="280"/>](https://metaso.cn/minimax-h3/?s=Magiviz) |
+<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+<tr>
+<td style="text-align: center; vertical-align: middle; width: 320px;">[<img src="public/images/meta.jpg" alt="秘塔科技 - MiniMax H3" width="280"/>](https://metaso.cn/minimax-h3/?s=Magiviz)</td>
+<td style="vertical-align: middle;"><strong>MiniMax H3 视频生成 API｜秘塔科技</strong><br><br>秘塔科技提供高性价比的 MiniMax H3 视频生成服务：<strong>768P 仅 0.09 元/秒，2K 仅 0.15 元/秒</strong>。支持原生 2K、音画同步，API 兼容 <strong>OpenAI 协议</strong>，同时支持 <strong>ComfyUI</strong>，无需自行部署 GPU。<br><br>通过 [Magiviz专属链接注册](https://metaso.cn/minimax-h3/?s=Magiviz)，即可领取赠送额度及专属优惠。</td>
+</tr>
+</table>
 
 ---
 
@@ -781,7 +786,12 @@ NEXT_PUBLIC_APP_URL
 
 ## Sponsor
 
-| **MiniMax H3 Video Generation API｜Metaso**<br><br>Cost-effective MiniMax H3 video generation service by Metaso: **768P at only ¥0.09/sec, 2K at only ¥0.15/sec**. Native 2K support, audio-video sync, **OpenAI-compatible API**, and **ComfyUI** support — no GPU deployment needed.<br><br>[Register via Magiviz exclusive link](https://metaso.cn/minimax-h3/?s=Magiviz) to claim free credits and exclusive discounts. | [<img src="public/images/meta.jpg" alt="Metaso - MiniMax H3" width="280"/>](https://metaso.cn/minimax-h3/?s=Magiviz) |
+<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+<tr>
+<td style="text-align: center; vertical-align: middle; width: 320px;">[<img src="public/images/meta.jpg" alt="Metaso - MiniMax H3" width="280"/>](https://metaso.cn/minimax-h3/?s=Magiviz)</td>
+<td style="vertical-align: middle;"><strong>MiniMax H3 Video Generation API｜Metaso</strong><br><br>Cost-effective MiniMax H3 video generation service by Metaso: <strong>768P at only ¥0.09/sec, 2K at only ¥0.15/sec</strong>. Native 2K support, audio-video sync, <strong>OpenAI-compatible API</strong>, and <strong>ComfyUI</strong> support — no GPU deployment needed.<br><br>[Register via Magiviz exclusive link](https://metaso.cn/minimax-h3/?s=Magiviz) to claim free credits and exclusive discounts.</td>
+</tr>
+</table>
 
 ---
 
