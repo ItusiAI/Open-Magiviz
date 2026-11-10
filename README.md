@@ -5,6 +5,10 @@
 <td style="text-align: center; vertical-align: middle; width: 320px;"><a href="https://metaso.cn/minimax-h3/?s=Magiviz" style="text-decoration: none; color: inherit;"><img src="public/images/meta.jpg" alt="秘塔科技 - MiniMax H3" width="280"/></a></td>
 <td style="vertical-align: middle;"><strong>MiniMax H3 视频生成 API｜秘塔科技</strong><br><br>秘塔科技提供高性价比的 MiniMax H3 视频生成服务：<strong>768P 仅 0.09 元/秒，2K 仅 0.15 元/秒</strong>。支持原生 2K、音画同步，API 兼容 <strong>OpenAI 协议</strong>，同时支持 <strong>ComfyUI</strong>，无需自行部署 GPU。<br><br>通过 <a href="https://metaso.cn/minimax-h3/?s=Magiviz">Magiviz专属链接注册</a>，即可领取赠送额度及专属优惠。</td>
 </tr>
+<tr>
+<td style="text-align: center; vertical-align: middle; width: 320px;"><a href="https://apixo.ai/?utm_source=github&utm_medium=sponsorship&utm_campaign=github_readme&utm_content=itusiai_open-magiviz" style="text-decoration: none; color: inherit;"><img src="public/images/APIXO.jpg" alt="APIXO - AI 图片与视频创作平台" width="280"/></a></td>
+<td style="vertical-align: middle;"><strong>APIXO：一站式 AI 图片与视频创作平台</strong><br><br>APIXO 汇集多款 AI 图片与视频模型，无需编程，打开网页即可创作；也支持通过 API 接入自己的应用与自动化工作流。<strong>Seedream 5.5 抢先体验，1K 文生图仅 $0.014/张起，享官价七折优惠。</strong>优惠自动生效，无需优惠码，让更多创意轻松落地。<br><br><a href="https://apixo.ai/models/seedream-5-5?utm_source=github&utm_medium=sponsorship&utm_campaign=github_readme&utm_content=itusiai_open-magiviz">Seedream 5.5 抢先体验</a> ｜ <a href="https://apixo.ai/?utm_source=github&utm_medium=sponsorship&utm_campaign=github_readme&utm_content=itusiai_open-magiviz">探索 APIXO 模型与优惠 →</a><br><br><sub>活动截至北京时间 2026 年 12 月 31 日 23:59</sub></td>
+</tr>
 </table>
 
 ---
@@ -790,6 +794,10 @@ NEXT_PUBLIC_APP_URL
 <tr>
 <td style="text-align: center; vertical-align: middle; width: 320px;"><a href="https://metaso.cn/minimax-h3/?s=Magiviz" style="text-decoration: none; color: inherit;"><img src="public/images/meta.jpg" alt="Metaso - MiniMax H3" width="280"/></a></td>
 <td style="vertical-align: middle;"><strong>MiniMax H3 Video Generation API｜Metaso</strong><br><br>Cost-effective MiniMax H3 video generation service by Metaso: <strong>768P at only ¥0.09/sec, 2K at only ¥0.15/sec</strong>. Native 2K support, audio-video sync, <strong>OpenAI-compatible API</strong>, and <strong>ComfyUI</strong> support — no GPU deployment needed.<br><br><a href="https://metaso.cn/minimax-h3/?s=Magiviz">Register via Magiviz exclusive link</a> to claim free credits and exclusive discounts.</td>
+</tr>
+<tr>
+<td style="text-align: center; vertical-align: middle; width: 320px;"><a href="https://apixo.ai/?utm_source=github&utm_medium=sponsorship&utm_campaign=github_readme&utm_content=itusiai_open-magiviz" style="text-decoration: none; color: inherit;"><img src="public/images/APIXO.jpg" alt="APIXO - AI Image & Video Creation Platform" width="280"/></a></td>
+<td style="vertical-align: middle;"><strong>APIXO: All-in-One AI Image & Video Creation Platform</strong><br><br>APIXO brings together multiple AI image and video models — no coding required, just open the website and start creating. It also supports API access for integrating into your own applications and automated workflows. <strong>Try Seedream 5.5 early: 1K text-to-image from just $0.014 per image, with 30% off the official price.</strong> Discounts apply automatically, no coupon code needed, so more ideas can come to life.<br><br><a href="https://apixo.ai/models/seedream-5-5?utm_source=github&utm_medium=sponsorship&utm_campaign=github_readme&utm_content=itusiai_open-magiviz">Try Seedream 5.5 early</a> ｜ <a href="https://apixo.ai/?utm_source=github&utm_medium=sponsorship&utm_campaign=github_readme&utm_content=itusiai_open-magiviz">Explore APIXO models and pricing →</a><br><br><sub>Promotion ends December 31, 2026 at 23:59 (Beijing Time)</sub></td>
 </tr>
 </table>
 
