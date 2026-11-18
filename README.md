@@ -9,6 +9,10 @@
 <td style="text-align: center; vertical-align: middle; width: 320px;"><a href="https://apixo.ai/zh?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=brand_mention" target="_blank" style="text-decoration: none; color: inherit;"><img src="public/images/APIXO-zh.png" width="90" alt="APIXO AI: 一站式 AI 视频制作与多模态创作平台"/></a></td>
 <td style="vertical-align: middle;"><strong><a href="https://apixo.ai/zh?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=brand_mention">APIXO AI</a>：一站式 AI 视频制作与多模态创作平台</strong><br>支持在线创作与企业级高并发 API，轻松为数据可视化看板、自动化前端报表与营销海报批量生成高清图文及视频。<br>🔥 <strong><a href="https://apixo.ai/zh/models/seedream-5-5?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=seedream_5_5">Seedream 5.5</a> 旗舰文生图 API 限时官价七折，低至 $0.014/张起！</strong><br>中国开发者免海外卡直连调用，支持银联与多种便捷支付方式，注册即送免费体验额度。<br>👉 <strong><a href="https://apixo.ai/zh/deals/black-friday?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=black_friday">查看 APIXO 黑五特惠活动，一键领取开发者额度 →</a></strong></td>
 </tr>
+<tr>
+<td style="text-align: center; vertical-align: middle; width: 320px;"><img src="public/images/zyailive01.jpg" width="180" alt="赞助商广告位招商"/></td>
+<td style="vertical-align: middle;"><strong>赞助商广告位招商｜Magiviz 品牌曝光</strong><br>Magiviz 是 AI 驱动的智能视频创作平台，现面向品牌开放 <strong>README 赞助商展示位</strong>，直达全球开发者与 AI 从业者。<br><strong>投放价值：</strong>README 首页顶部黄金位置，中英文双版本同步展示，受众精准且长期有效。<br><strong>合作形式：</strong>Logo 展示 + 专属推广链接 + 产品介绍，支持周期续约与多渠道组合投放。<br><strong>适合品牌：</strong>AI 模型与 API 服务商、SaaS 与开发工具、云与算力厂商、创作类软硬件品牌。<br>👉 <strong>广告位洽谈请添加微信：zyailive01</strong></td>
+</tr>
 </table>
 
 ---
@@ -798,6 +802,10 @@ NEXT_PUBLIC_APP_URL
 <tr>
 <td style="text-align: center; vertical-align: middle; width: 320px;"><a href="https://apixo.ai/?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=brand_mention" target="_blank" style="text-decoration: none; color: inherit;"><img src="public/images/APIXO-en.png" width="90" alt="APIXO AI: All-in-One AI Video Maker & Multimodal Creation Platform"/></a></td>
 <td style="vertical-align: middle;"><strong><a href="https://apixo.ai/?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=brand_mention">APIXO AI</a>: All-in-One AI Video Maker & Multimodal Creation Platform</strong><br>Generate high-fidelity visuals on the web or automate chart/poster generation and video workflows via robust APIs.<br>🔥 <strong><a href="https://apixo.ai/models/seedream-5-5?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=seedream_5_5">Seedream 5.5</a> Text-to-Image API: 30% OFF official rate, from $0.014/image!</strong><br>Integrated with Seedance 2.5 (4K video) and unified model access.<br>👉 <strong><a href="https://apixo.ai/deals/black-friday?utm_source=github&utm_medium=sponsorship&utm_campaign=open_magiviz&utm_content=black_friday">Explore APIXO Black Friday Deals & Free Credits →</a></strong></td>
+</tr>
+<tr>
+<td style="text-align: center; vertical-align: middle; width: 320px;"><img src="public/images/zyailive01.jpg" width="180" alt="Sponsor slot advertising"/></td>
+<td style="vertical-align: middle;"><strong>Sponsor Slot Advertising｜Brand Exposure on Magiviz</strong><br>Magiviz is an AI-powered intelligent video creation platform. The <strong>README sponsor showcase slot</strong> is now open to brands, reaching developers and AI practitioners worldwide.<br><strong>Why sponsor here:</strong> a premium top-of-README position, simultaneous Chinese and English placement, a highly targeted audience, and long-lasting visibility.<br><strong>Formats:</strong> logo display + dedicated tracking link + product copy, renewable on a schedule and extendable to multi-channel campaigns.<br><strong>Ideal for:</strong> AI model and API providers, SaaS and developer tools, cloud and compute vendors, and creative software and hardware brands.<br>👉 <strong>Contact us on WeChat to book a slot: zyailive01</strong></td>
 </tr>
 </table>
 
